@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VOX Black · Protótipo conceitual</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Protótipo conceitual da nova identidade da VOX, desenvolvido pela Getê Marketing.">
+<meta property="og:title" content="VOX Black · Protótipo conceitual">
+<meta property="og:description" content="Troque a rota. Não o checkout. Proposta de nova identidade e site, por Getê Marketing.">
+<meta property="og:image" content="https://lucasjaxr6-ctrl.github.io/vox-black/og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0B0D0C">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --preto:#0B0D0C; --grafite:#151A18; --grafite2:#1B2220; --linha:#26302C;
+  --sinal:#3CF2A6; --sinal-escuro:#0E3B29; --gelo:#E9F5EF; --mudo:#8FA39A; --alerta:#FF8A3D;
+  --display:"Archivo",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --w:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--preto)}
+body{font-family:var(--display);font-variation-settings:"wdth" 100;color:var(--gelo);background:var(--preto);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--sinal);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 28px}
+.num{font-family:var(--mono);font-feature-settings:"tnum"}
+
+/* aviso de protótipo */
+.proto{background:var(--sinal);color:var(--preto);font-size:13px;font-weight:600;text-align:center;padding:8px 16px}
+.proto a{text-decoration:underline}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(11,13,12,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--linha)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;font-variation-settings:"wdth" 112;letter-spacing:.02em}
+.logo .mark{display:flex;gap:3px}
+.logo .mark i{display:block;width:6px;height:22px;border-radius:3px;background:var(--sinal);transform:skewX(-18deg)}
+.logo .mark i:nth-child(2){opacity:.55}.logo .mark i:nth-child(3){opacity:.25}
+.logo small{font-weight:500;font-size:20px;color:var(--sinal);font-variation-settings:"wdth" 100;letter-spacing:0}
+.links{display:flex;gap:30px;font-size:15px;color:var(--mudo)}
+.links a:hover{color:var(--gelo)}
+.btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 22px;border-radius:10px;font-weight:700;font-size:15px;transition:transform .15s,background .2s}
+.btn.primary{background:var(--sinal);color:var(--preto)}
+.btn.primary:hover{background:#6af7bd}
+.btn.ghost{border:1px solid var(--linha);color:var(--gelo)}
+.btn.ghost:hover{border-color:var(--mudo)}
+.btn:active{transform:scale(.97)}
+nav .btn{height:40px;padding:0 18px;font-size:14px}
+.menu-btn{display:none}
+
+/* hero */
+.hero{padding:84px 0 40px;position:relative}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center}
+h1{font-size:clamp(48px,6.6vw,96px);font-weight:850;line-height:.9;font-variation-settings:"wdth" 72;letter-spacing:-.01em;text-transform:none}
+h1 .l2{display:block;color:var(--mudo);font-weight:300}
+.hero p.sub{font-size:19px;color:#b9cbc2;max-width:470px;margin:26px 0 34px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero .note{margin-top:28px;font-size:14px;color:var(--mudo)}
+
+/* roteador */
+.router{background:var(--grafite);border:1px solid var(--linha);border-radius:22px;padding:18px 18px 14px;position:relative;overflow:hidden}
+.router::before{content:"";position:absolute;inset:0;background:radial-gradient(420px 260px at 38% 52%,rgba(60,242,166,.10),transparent 70%);pointer-events:none}
+.rhead{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--mudo);position:relative}
+.live{display:flex;align-items:center;gap:8px;color:var(--gelo)}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--sinal);box-shadow:0 0 0 0 rgba(60,242,166,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(60,242,166,0)}100%{box-shadow:0 0 0 0 rgba(60,242,166,0)}}
+#rsvg{width:100%;height:auto;display:block;margin-top:6px}
+.path{fill:none;stroke:var(--linha);stroke-width:2}
+.path.on{stroke:#2c5e48}
+.path.off{stroke:var(--alerta);stroke-dasharray:4 6;opacity:.6}
+.gw{cursor:pointer}
+.gw rect{fill:var(--grafite2);stroke:var(--linha);transition:stroke .2s,fill .2s}
+.gw:hover rect,.gw:focus rect{stroke:var(--sinal)}
+.gw.off rect{fill:#1e1612;stroke:var(--alerta)}
+.gw text{font-family:var(--display);fill:var(--gelo);font-size:14px;font-weight:600}
+.gw text.pct{font-family:var(--mono);fill:var(--sinal);font-size:13px;font-weight:500}
+.gw.off text.pct{fill:var(--alerta)}
+.gw:focus{outline:none}
+.hub rect{fill:var(--sinal)}
+.hub text{fill:var(--preto);font-weight:800;font-size:15px}
+.src text{fill:var(--mudo);font-size:13px}
+.rfoot{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;border-top:1px solid var(--linha);padding-top:12px;margin-top:4px;position:relative}
+.log{font-family:var(--mono);font-size:12px;color:var(--mudo);min-height:36px;line-height:1.5}
+.log b{color:var(--gelo);font-weight:500}
+.log .warn{color:var(--alerta)}
+.counter{text-align:right;flex-shrink:0}
+.counter .num{font-size:22px;color:var(--gelo);display:block}
+.counter span{font-size:12px;color:var(--mudo)}
+.hint{font-size:13px;color:var(--mudo);margin-top:12px;text-align:center}
+
+/* faixa gateways */
+.gateways{border-top:1px solid var(--linha);border-bottom:1px solid var(--linha);margin-top:56px}
+.gateways .wrap{display:grid;grid-template-columns:240px 1fr;gap:28px;padding-top:28px;padding-bottom:28px;align-items:center}
+.gateways h2{font-size:17px;font-weight:600;line-height:1.35;font-variation-settings:"wdth" 100;color:var(--mudo)}
+.gateways h2 strong{display:block;color:var(--gelo);font-size:30px;font-weight:800;font-variation-settings:"wdth" 75}
+.glist{display:flex;flex-wrap:wrap;gap:8px}
+.glist span{font-size:14px;padding:7px 12px;border:1px solid var(--linha);border-radius:8px;color:#c7d6cf;display:inline-flex;gap:8px;align-items:center}
+.glist span em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--mudo)}
+
+/* seções */
+section.blk{padding:120px 0 0}
+h2.big{font-size:clamp(40px,5vw,68px);font-weight:850;line-height:.95;font-variation-settings:"wdth" 72;max-width:760px}
+.lede{font-size:18px;color:#b9cbc2;max-width:560px;margin-top:18px}
+
+/* fluxo */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);margin-top:56px;position:relative}
+.flow::before{content:"";position:absolute;left:9%;right:9%;top:23px;height:2px;background:linear-gradient(90deg,var(--linha),var(--sinal) 50%,var(--linha))}
+.step{position:relative;padding-right:18px}
+.step .dot{width:48px;height:48px;border-radius:50%;background:var(--preto);border:2px solid var(--linha);display:grid;place-items:center;font-family:var(--mono);font-size:14px;color:var(--mudo);position:relative}
+.step.vox .dot{background:var(--sinal);border-color:var(--sinal);color:var(--preto);font-weight:600}
+.step h3{font-size:18px;font-weight:700;margin:18px 0 6px}
+.step p{font-size:14.5px;color:var(--mudo)}
+
+/* recursos com abas */
+.feat{display:grid;grid-template-columns:360px 1fr;gap:40px;margin-top:56px;align-items:start}
+.tabs{display:flex;flex-direction:column;border-left:1px solid var(--linha)}
+.tab{text-align:left;padding:18px 0 18px 24px;border-left:2px solid transparent;margin-left:-1px;transition:border-color .2s}
+.tab h3{font-size:21px;font-weight:700;color:var(--mudo);transition:color .2s}
+.tab p{font-size:14.5px;color:var(--mudo);max-height:0;overflow:hidden;opacity:0;transition:max-height .35s,opacity .3s,margin .3s}
+.tab[aria-selected="true"]{border-left-color:var(--sinal)}
+.tab[aria-selected="true"] h3{color:var(--gelo)}
+.tab[aria-selected="true"] p{max-height:120px;opacity:1;margin-top:6px}
+.panel{background:var(--grafite);border:1px solid var(--linha);border-radius:22px;padding:28px;min-height:420px;position:relative}
+.pane{display:none}.pane.show{display:block;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.pane h4{font-size:15px;font-weight:600;color:var(--mudo);margin-bottom:16px}
+/* funil */
+.funnel{display:flex;flex-direction:column;gap:10px}
+.fr{display:grid;grid-template-columns:120px 1fr 70px;align-items:center;gap:14px;font-size:14px}
+.fr .bar{height:30px;border-radius:7px;background:var(--grafite2);overflow:hidden}
+.fr .bar i{display:block;height:100%;background:linear-gradient(90deg,#1f8f62,var(--sinal));border-radius:7px;width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.fr .num{text-align:right;color:var(--gelo)}
+.fr.loss .bar i{background:linear-gradient(90deg,#8a4a22,var(--alerta))}
+.fnote{margin-top:18px;font-size:14px;color:var(--mudo)}
+.fnote b{color:var(--alerta);font-weight:600}
+/* recuperação */
+.chat{display:flex;flex-direction:column;gap:10px;max-width:420px}
+.msg{background:var(--grafite2);border:1px solid var(--linha);border-radius:14px 14px 14px 4px;padding:12px 14px;font-size:14.5px;opacity:0;transform:translateY(6px);transition:all .4s}
+.msg.me{align-self:flex-end;background:var(--sinal-escuro);border-color:#1d6b4b;border-radius:14px 14px 4px 14px}
+.msg.show{opacity:1;transform:none}
+.msg small{display:block;font-family:var(--mono);font-size:11px;color:var(--mudo);margin-top:4px}
+.paid{display:inline-flex;gap:8px;align-items:center;color:var(--sinal);font-weight:600}
+/* conciliação */
+.recon{font-family:var(--mono);font-size:13.5px}
+.rrow{display:grid;grid-template-columns:70px 1fr auto;gap:16px;padding:13px 0;border-bottom:1px solid var(--linha);color:var(--mudo)}
+.rrow b{font-weight:500;color:var(--sinal)}
+.rrow.new{animation:flash 1.2s ease}
+@keyframes flash{from{background:rgba(60,242,166,.12)}to{background:transparent}}
+/* regras */
+.rules{display:grid;gap:14px}
+.rule{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:var(--grafite2);border:1px solid var(--linha);border-radius:12px;padding:16px 18px}
+.rule h5{font-size:15px;font-weight:600}
+.rule p{font-size:13.5px;color:var(--mudo)}
+.switch{width:46px;height:26px;border-radius:13px;background:var(--linha);position:relative;transition:background .2s}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--gelo);transition:transform .2s}
+.switch[aria-checked="true"]{background:var(--sinal)}
+.switch[aria-checked="true"]::after{transform:translateX(20px);background:var(--preto)}
+.split{display:flex;height:12px;border-radius:6px;overflow:hidden;margin-top:12px}
+.split i{display:block;height:100%;transition:width .5s}
+
+/* checkout */
+.co{display:grid;grid-template-columns:1fr 380px;gap:64px;align-items:center;margin-top:20px}
+.steps3{display:flex;gap:8px;margin-top:30px;flex-wrap:wrap}
+.steps3 button{padding:10px 16px;border-radius:10px;border:1px solid var(--linha);font-size:14px;color:var(--mudo)}
+.steps3 button[aria-pressed="true"]{border-color:var(--sinal);color:var(--gelo);background:var(--grafite)}
+.phone{width:340px;margin:0 auto;background:#050606;border:1px solid var(--linha);border-radius:44px;padding:12px;box-shadow:0 40px 80px -30px rgba(60,242,166,.25)}
+.screen{background:#fff;color:#111;border-radius:34px;height:640px;overflow:hidden;font-variation-settings:"wdth" 100;position:relative}
+.sbar{display:flex;justify-content:space-between;align-items:center;padding:20px 22px 12px;border-bottom:1px solid #eee;font-size:13px}
+.sbar b{font-size:16px}
+.sbar span{color:#2a8a63;font-weight:600;font-size:12px}
+.cstep{display:none;padding:22px}.cstep.show{display:block;animation:in .3s ease}
+.cstep h6{font-size:20px;font-weight:700;margin-bottom:16px}
+.fld{border:1px solid #e3e6e4;border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:14px}
+.fld small{display:block;color:#7a857f;font-size:11px}
+.fld.ok{border-color:#6fd4a6}
+.opt{border:1.5px solid #e3e6e4;border-radius:12px;padding:14px;margin-bottom:10px;display:flex;justify-content:space-between;font-size:14px}
+.opt.sel{border-color:#1fa36d;background:#f1fbf6}
+.opt em{font-style:normal;color:#1fa36d;font-weight:600;font-size:12px}
+.pay{width:100%;height:50px;border-radius:12px;background:#111;color:#fff;font-weight:700;margin-top:8px}
+.qr{width:200px;height:200px;margin:12px auto;display:block}
+.timer{text-align:center;font-size:14px;color:#555}
+.timer b{font-family:var(--mono)}
+.waiting{display:block;width:max-content;margin:10px auto 0;background:#fff6e5;color:#a26500;font-size:12px;font-weight:600;padding:6px 12px;border-radius:99px}
+.bump{border:1.5px dashed #1fa36d;border-radius:12px;padding:12px;font-size:13px;margin:12px 0;display:flex;gap:10px;align-items:center}
+.bump i{width:18px;height:18px;border-radius:5px;background:#1fa36d;flex-shrink:0}
+
+/* planos */
+.calc{margin-top:48px;background:var(--grafite);border:1px solid var(--linha);border-radius:22px;padding:32px}
+.calc label{display:flex;justify-content:space-between;align-items:baseline;gap:16px;font-size:16px;color:var(--mudo);flex-wrap:wrap}
+.calc label .num{font-size:34px;color:var(--gelo)}
+input[type=range]{width:100%;margin:20px 0 8px;accent-color:var(--sinal);height:28px}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.plan{border:1px solid var(--linha);border-radius:16px;padding:24px;position:relative;transition:border-color .3s,background .3s}
+.plan.best{border-color:var(--sinal);background:rgba(60,242,166,.05)}
+.plan .tag{position:absolute;top:-12px;left:22px;background:var(--sinal);color:var(--preto);font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;opacity:0;transition:opacity .3s}
+.plan.best .tag{opacity:1}
+.plan h3{font-size:26px;font-weight:800;font-variation-settings:"wdth" 80}
+.plan .fee{font-size:14px;color:var(--mudo);margin:4px 0 18px}
+.plan .cost{font-family:var(--mono);font-size:28px;color:var(--gelo)}
+.plan .cost small{font-size:13px;color:var(--mudo);display:block;font-family:var(--display)}
+.plan ul{list-style:none;margin-top:18px;border-top:1px solid var(--linha);padding-top:14px;font-size:14px;color:#c0d0c8}
+.plan li{padding:4px 0}
+.plan .btn{margin-top:20px;width:100%;justify-content:center}
+
+/* números */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha);margin-top:56px}
+.stats div{padding:34px 26px;border-right:1px solid var(--linha)}
+.stats div:last-child{border-right:0}
+.stats .num{font-size:clamp(30px,3.6vw,48px);display:block;color:var(--gelo)}
+.stats span{color:var(--mudo);font-size:15px}
+
+/* faq */
+.faq{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;margin-top:0}
+details{border-bottom:1px solid var(--linha)}
+summary{list-style:none;cursor:pointer;padding:22px 40px 22px 0;font-size:18px;font-weight:600;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";position:absolute;right:6px;top:30px;width:12px;height:12px;border-right:2px solid var(--sinal);border-bottom:2px solid var(--sinal);transform:rotate(45deg);transition:transform .25s}
+details[open] summary::after{transform:rotate(-135deg);top:36px}
+details p{color:var(--mudo);padding:0 40px 22px 0;font-size:16px}
+
+/* cta */
+.final{margin-top:140px;padding:110px 0;border-top:1px solid var(--linha);text-align:left;position:relative;overflow:hidden}
+.final h2{font-size:clamp(44px,7vw,110px);font-weight:900;line-height:.88;font-variation-settings:"wdth" 65;max-width:900px}
+.final p{font-size:18px;color:#b9cbc2;margin:24px 0 32px;max-width:480px}
+.final canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.5;pointer-events:none}
+.final .wrap{position:relative}
+footer{border-top:1px solid var(--linha);padding:34px 0 46px;font-size:14px;color:var(--mudo)}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer .credit{max-width:560px}
+footer .credit b{color:var(--gelo);font-weight:600}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120%);background:var(--gelo);color:var(--preto);padding:13px 18px;border-radius:12px;font-size:14px;font-weight:600;z-index:99;transition:transform .35s cubic-bezier(.2,.9,.3,1.2);max-width:calc(100% - 32px)}
+.toast.show{transform:translate(-50%,0)}
+
+/* responsivo */
+@media (max-width:980px){
+  .hero .wrap,.feat,.co,.faq{grid-template-columns:1fr}
+  .hero{padding-top:56px}
+  .links{display:none}
+  .gateways .wrap{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr;gap:26px}
+  .flow::before{left:23px;right:auto;top:20px;bottom:20px;width:2px;height:auto;background:linear-gradient(180deg,var(--linha),var(--sinal) 50%,var(--linha))}
+  .step{display:grid;grid-template-columns:48px 1fr;column-gap:18px}
+  .step h3{margin-top:10px}
+  .step p{grid-column:2}
+  .tabs{flex-direction:row;overflow-x:auto;border-left:0;border-bottom:1px solid var(--linha);gap:22px}
+  .tab{border-left:0;border-bottom:2px solid transparent;margin:0 0 -1px;padding:12px 0;flex-shrink:0}
+  .tab[aria-selected="true"]{border-bottom-color:var(--sinal)}
+  .tab p{display:none}
+  .plans{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .stats div:nth-child(2){border-right:0}
+  .stats div:nth-child(-n+2){border-bottom:1px solid var(--linha)}
+  section.blk{padding-top:90px}
+}
+@media (max-width:560px){
+  .wrap{padding:0 18px}
+  nav .btn{display:none}
+  .phone{width:100%;max-width:330px}
+  .fr{grid-template-columns:90px 1fr 54px;font-size:13px}
+  .calc{padding:22px}
+  .panel{padding:20px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="proto">Protótipo conceitual criado pela Getê Marketing para apresentar a nova identidade da VOX. Não é o site oficial.</div>
+
+<nav aria-label="Principal">
+  <div class="wrap">
+    <a href="#topo" class="logo" aria-label="VOX Black, início"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>VOX<small>.black</small></a>
+    <div class="links">
+      <a href="#como">Como funciona</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#checkout">Checkout</a>
+      <a href="#planos">Planos</a>
+      <a href="#duvidas">Dúvidas</a>
+    </div>
+    <a href="#planos" class="btn primary">Criar conta</a>
+  </div>
+</nav>
+
+<main id="topo">
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Troque a rota.<span class="l2">Não o checkout.</span></h1>
+      <p class="sub">Checkout transparente para Shopify, no domínio da sua loja, com Pix e cartão distribuídos entre os gateways que você escolher.</p>
+      <div class="ctas">
+        <a href="#planos" class="btn primary">Começar grátis</a>
+        <a href="#como" class="btn ghost">Ver como funciona</a>
+      </div>
+      <p class="note">Sem mensalidade no plano Basic. O dinheiro cai direto no seu gateway.</p>
+    </div>
+
+    <div class="router" aria-label="Simulador de roteamento de pagamentos">
+      <div class="rhead"><span class="live"><i aria-hidden="true"></i>Roteamento ao vivo</span><span>Pix e cartão</span></div>
+      <svg id="rsvg" viewBox="0 0 600 400" role="img" aria-label="Pedidos passando pela VOX e indo para quatro gateways">
+        <g id="paths"></g>
+        <g id="pulses"></g>
+        <g class="src"><text x="18" y="196">Pedidos</text><text x="18" y="214">da loja</text></g>
+        <g class="hub"><rect x="198" y="176" width="124" height="48" rx="12"/><text x="260" y="206" text-anchor="middle">VOX Router</text></g>
+        <g id="gws"></g>
+      </svg>
+      <div class="rfoot">
+        <div class="log" id="log" aria-live="polite"><b>Tudo certo.</b> 4 gateways recebendo pedidos.</div>
+        <div class="counter"><span class="num" id="cnt">0</span><span>pedidos roteados agora</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><p class="hint">Clique num gateway para tirá-lo da rota, do jeito que você faria no painel. Os pedidos seguem pelos outros.</p></div>
+
+  <div class="gateways">
+    <div class="wrap">
+      <h2><strong class="num">19</strong>gateways integrados, Pix e cartão</h2>
+      <div class="glist" id="glist"></div>
+    </div>
+  </div>
+</header>
+
+<!-- COMO FUNCIONA -->
+<section class="blk" id="como">
+  <div class="wrap">
+    <h2 class="big">O pagamento passa pela VOX. O dinheiro, não.</h2>
+    <p class="lede">A VOX orquestra a transação, mas cada cobrança é criada com a credencial da sua loja, na sua conta do gateway.</p>
+    <div class="flow">
+      <div class="step"><div class="dot num">1</div><h3>Cliente</h3><p>Finaliza a compra na sua loja Shopify.</p></div>
+      <div class="step"><div class="dot num">2</div><h3>Seu domínio</h3><p>Paga em checkout.sualoja.com.br, com a sua marca.</p></div>
+      <div class="step vox"><div class="dot num">3</div><h3>VOX</h3><p>Escolhe o gateway pela regra que você definiu.</p></div>
+      <div class="step"><div class="dot num">4</div><h3>Seu gateway</h3><p>Processa o Pix ou o cartão.</p></div>
+      <div class="step"><div class="dot num">5</div><h3>Sua conta</h3><p>Recebe direto do provedor, no prazo dele.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RECURSOS -->
+<section class="blk" id="recursos">
+  <div class="wrap">
+    <h2 class="big">Feito para operação que não pode parar.</h2>
+    <div class="feat">
+      <div class="tabs" role="tablist" aria-label="Recursos">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="p-funil" id="t-funil"><h3>Funil ao vivo</h3><p>Veja onde cada cliente está no checkout e onde a venda se perde, atualizado a cada 5 segundos.</p></button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-rec" id="t-rec"><h3>Recuperação de Pix</h3><p>Quem gerou o Pix e não pagou recebe um lembrete com o código pronto para copiar.</p></button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-con" id="t-con"><h3>Conciliação</h3><p>A cada 5 minutos, pedidos pendentes são conferidos direto na API do gateway.</p></button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-reg" id="t-reg"><h3>Regras de rota</h3><p>Divida pedidos por porcentagem ou mande os de valor alto para outro gateway.</p></button>
+      </div>
+      <div class="panel">
+        <div class="pane show" id="p-funil" role="tabpanel" aria-labelledby="t-funil">
+          <h4>Hoje, das 0h até agora</h4>
+          <div class="funnel" id="funnel"></div>
+          <p class="fnote">Maior perda: <b>pagamento</b>. É ali que a recuperação de Pix trabalha.</p>
+        </div>
+        <div class="pane" id="p-rec" role="tabpanel" aria-labelledby="t-rec">
+          <h4>Pix gerado às 19:02, não pago</h4>
+          <div class="chat" id="chat">
+            <div class="msg">Oi, Beatriz! Seu pedido na Noma Studio está reservado. O Pix vence em 25 minutos.<small>19:17 · lembrete automático</small></div>
+            <div class="msg">Código Pix pronto para copiar: 00020126...5204<small>19:17</small></div>
+            <div class="msg me">Paguei agora!<small>19:21</small></div>
+            <div class="msg"><span class="paid">● Pagamento confirmado · R$ 134,90</span><small>19:21 · pedido reconciliado</small></div>
+          </div>
+        </div>
+        <div class="pane" id="p-con" role="tabpanel" aria-labelledby="t-con">
+          <h4>Conferência automática na API do gateway</h4>
+          <div class="recon" id="recon"></div>
+        </div>
+        <div class="pane" id="p-reg" role="tabpanel" aria-labelledby="t-reg">
+          <h4>Regras do cartão</h4>
+          <div class="rules">
+            <div class="rule"><div><h5>Distribuição automática</h5><p>Divide os pedidos entre até 4 gateways.</p><div class="split" id="split"></div></div><button class="switch" role="switch" aria-checked="true" aria-label="Distribuição automática" data-k="dist"></button></div>
+            <div class="rule"><div><h5>Pedidos acima de R$ 500 no Pagar.me</h5><p>Roteamento condicional por valor.</p></div><button class="switch" role="switch" aria-checked="false" aria-label="Roteamento por valor" data-k="valor"></button></div>
+            <div class="rule"><div><h5>Pix em gateway separado</h5><p>Pix no PushinPay, cartão nos demais.</p></div><button class="switch" role="switch" aria-checked="true" aria-label="Pix separado" data-k="pix"></button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKOUT -->
+<section class="blk" id="checkout">
+  <div class="wrap co">
+    <div>
+      <h2 class="big">Para o cliente, só aparece a sua marca.</h2>
+      <p class="lede">Checkout em 3 etapas, no seu domínio, com Pix com desconto, cartão e order bump sem sair do fluxo.</p>
+      <div class="steps3" role="group" aria-label="Etapas do checkout">
+        <button aria-pressed="true" data-s="0">Identificação</button>
+        <button aria-pressed="false" data-s="1">Pagamento</button>
+        <button aria-pressed="false" data-s="2">Pix gerado</button>
+      </div>
+    </div>
+    <div class="phone" aria-label="Prévia do checkout no celular">
+      <div class="screen">
+        <div class="sbar"><b>Noma Studio</b><span>checkout.nomastudio.com.br</span></div>
+        <div class="cstep show">
+          <h6>Seus dados</h6>
+          <div class="fld ok"><small>Nome</small>Beatriz Lima</div>
+          <div class="fld ok"><small>E-mail</small>bia.lima@email.com</div>
+          <div class="fld ok"><small>Celular</small>(21) 98888-0000</div>
+          <div class="fld ok"><small>CPF</small>123.456.789-09</div>
+          <button class="pay" data-go="1">Continuar</button>
+        </div>
+        <div class="cstep">
+          <h6>Pagamento</h6>
+          <div class="opt sel"><span>Pix</span><em>5% de desconto</em></div>
+          <div class="opt"><span>Cartão de crédito</span><span>até 12x</span></div>
+          <div class="bump"><i></i><span>Adicionar bolsa de linho por <b>R$ 39,90</b></span></div>
+          <div class="fld"><small>Total</small><b>R$ 134,90</b></div>
+          <button class="pay" data-go="2">Pagar com Pix</button>
+        </div>
+        <div class="cstep">
+          <h6 style="text-align:center">Quase lá</h6>
+          <p class="timer">Pague em até <b id="tmr">29:59</b></p>
+          <svg class="qr" id="qr" viewBox="0 0 29 29" aria-label="QR code ilustrativo"></svg>
+          <button class="pay" data-copy>Copiar código Pix</button>
+          <span class="waiting">Aguardando pagamento</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section class="blk" id="planos">
+  <div class="wrap">
+    <h2 class="big">Quanto você pagaria este mês.</h2>
+    <p class="lede">Arraste para o faturamento da sua loja. A VOX mostra o plano que sai mais barato.</p>
+    <div class="calc">
+      <label for="fat">Faturamento mensal <span class="num" id="fatv">R$ 60.000</span></label>
+      <input type="range" id="fat" min="5000" max="500000" step="5000" value="60000">
+      <div class="plans" id="plans"></div>
+    </div>
+  </div>
+</section>
+
+<!-- NÚMEROS -->
+<section class="blk">
+  <div class="wrap">
+    <h2 class="big">Rodando em produção.</h2>
+    <div class="stats">
+      <div><span class="num" data-to="50" data-pre="R$ " data-suf="M+">R$ 0M+</span><span>em pagamentos processados</span></div>
+      <div><span class="num" data-to="250" data-suf=" mil+">0 mil+</span><span>pedidos pagos</span></div>
+      <div><span class="num" data-to="19">0</span><span>gateways integrados</span></div>
+      <div><span class="num" data-to="5" data-suf=" min">0 min</span><span>entre cada conciliação</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="blk" id="duvidas">
+  <div class="wrap faq">
+    <h2 class="big">Antes de colocar em produção.</h2>
+    <div>
+      <details open><summary>A VOX recebe o dinheiro das minhas vendas?</summary><p>Não. Cada cobrança é criada com a credencial da sua loja, na sua conta do gateway. A taxa da VOX é cobrada à parte, por Pix, a partir do extrato do painel.</p></details>
+      <details><summary>Posso usar gateways diferentes para Pix e cartão?</summary><p>Sim. Pix e cartão são configurados separados, e você pode dividir os pedidos entre até 4 gateways na porcentagem que quiser.</p></details>
+      <details><summary>Se um gateway bloquear, o que acontece?</summary><p>Você troca a rota no painel em segundos, sem mexer no checkout. Domínio, produtos e configurações continuam iguais.</p></details>
+      <details><summary>O checkout usa o domínio da minha loja?</summary><p>Sim. Você aponta um subdomínio, como checkout.sualoja.com.br, com um registro CNAME, e o HTTPS é emitido sozinho.</p></details>
+      <details><summary>A VOX integra com tracking e mídia?</summary><p>Sim. Pixels da Meta, do TikTok e do Google, além da Utmify para acompanhar a origem de cada venda.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <canvas id="fcv" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <h2>Mais controle. Menos dependência.</h2>
+    <p>Conecte sua Shopify e coloque o primeiro checkout no ar hoje, sem mensalidade.</p>
+    <a href="#planos" class="btn primary">Criar minha conta</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#topo" class="logo" aria-label="VOX Black"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>VOX<small>.black</small></a>
+    <p class="credit"><b>Protótipo conceitual por Getê Marketing.</b> Proposta de identidade e site para a VOX, sem vínculo com o site oficial. Conteúdo protegido pela Lei nº 9.610/1998; uso sujeito à contratação. Botões e dados são demonstrativos.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(()=>{
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const NS='http://www.w3.org/2000/svg';
+const el=(t,a={})=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
+const toast=t=>{const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),2600)};
+
+/* ---------- ROTEADOR ---------- */
+const G=[{n:'Pagar.me',w:45,y:56},{n:'Mercado Pago',w:30,y:148},{n:'Appmax',w:15,y:240},{n:'PushinPay',w:10,y:332}];
+const paths=$('#paths'),gws=$('#gws'),pulses=$('#pulses');
+const inP=el('path',{d:'M 80 200 L 198 200',class:'path on'});paths.appendChild(inP);
+G.forEach((g,i)=>{
+  g.on=true;
+  g.p=el('path',{d:`M 322 200 C 390 200 390 ${g.y+22} 440 ${g.y+22}`,class:'path on'});paths.appendChild(g.p);
+  const grp=el('g',{class:'gw',tabindex:0,role:'button','aria-label':`${g.n}: clique para tirar da rota`});
+  grp.appendChild(el('rect',{x:440,y:g.y,width:148,height:44,rx:10}));
+  const t=el('text',{x:454,y:g.y+27});t.textContent=g.n;grp.appendChild(t);
+  g.t=el('text',{x:578,y:g.y+27,'text-anchor':'end',class:'pct'});grp.appendChild(g.t);
+  g.el=grp;gws.appendChild(grp);
+  const tog=()=>toggle(i);grp.addEventListener('click',tog);grp.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tog()}});
+});
+function shares(){const on=G.filter(g=>g.on),tot=on.reduce((a,g)=>a+g.w,0);G.forEach(g=>g.s=g.on?g.w/tot:0)}
+function render(){shares();G.forEach(g=>{g.t.textContent=g.on?Math.round(g.s*100)+'%':'fora';g.el.classList.toggle('off',!g.on);g.p.setAttribute('class','path '+(g.on?'on':'off'));g.el.setAttribute('aria-label',g.on?`${g.n}, ${Math.round(g.s*100)}% dos pedidos. Clique para tirar da rota`:`${g.n} fora da rota. Clique para voltar`)})}
+const hhmm=()=>new Date().toLocaleTimeString('pt-BR');
+function toggle(i){
+  const g=G[i];
+  if(g.on&&G.filter(x=>x.on).length===1){toast('Deixe ao menos um gateway na rota.');return}
+  g.on=!g.on;render();
+  const best=G.filter(x=>x.on).sort((a,b)=>b.s-a.s)[0];
+  $('#log').innerHTML=g.on?`<b>${hhmm()}</b> ${g.n} voltou para a rota.`:`<b>${hhmm()}</b> <span class="warn">${g.n} fora da rota.</span> Pedidos seguem, ${best.n} agora recebe ${Math.round(best.s*100)}%.`;
+}
+render();
+let count=1287;const cnt=$('#cnt');cnt.textContent=count.toLocaleString('pt-BR');
+const live=[];
+function spawn(){
+  shares();let r=Math.random(),acc=0,g=G.find(x=>x.on);
+  for(const x of G){if(!x.on)continue;acc+=x.s;if(r<=acc){g=x;break}}
+  const c=el('circle',{r:4.5,fill:'#3CF2A6'});pulses.appendChild(c);
+  live.push({c,g,t:0,len1:inP.getTotalLength(),len2:g.p.getTotalLength(),pix:Math.random()<.55});
+  if(Math.random()<.5)c.setAttribute('fill',Math.random()<.5?'#3CF2A6':'#E9F5EF');
+}
+let last=performance.now(),acc=0;
+function tick(now){
+  const dt=Math.min(64,now-last);last=now;acc+=dt;
+  if(acc>260){acc=0;spawn()}
+  for(let k=live.length-1;k>=0;k--){
+    const p=live[k];p.t+=dt/1500;
+    let pt;
+    if(p.t<.42){pt=inP.getPointAtLength(p.t/.42*p.len1)}
+    else if(p.t<.5){pt={x:260+(p.t-.42)/.08*62,y:200}}
+    else{ if(!p.g.on){ // redireciona se o gateway saiu no caminho
+        shares();p.g=G.filter(x=>x.on)[0];p.len2=p.g.p.getTotalLength()}
+      pt=p.g.p.getPointAtLength(Math.min(1,(p.t-.5)/.5)*p.len2)}
+    p.c.setAttribute('cx',pt.x);p.c.setAttribute('cy',pt.y);
+    p.c.setAttribute('opacity',p.t>.42&&p.t<.5?0:1);
+    if(p.t>=1){p.c.remove();live.splice(k,1);count++;cnt.textContent=count.toLocaleString('pt-BR')}
+  }
+  requestAnimationFrame(tick);
+}
+if(!reduce)requestAnimationFrame(tick);
+
+/* gateways */
+const lista=[['Appmax','Pix e cartão'],['Pagar.me','Pix e cartão'],['Mercado Pago','Pix e cartão'],['Freepay','Pix e cartão'],['HyperCash','Pix e cartão'],['FintPag','Pix e cartão'],['HylexPay','Pix e cartão'],['Beehive','Pix e cartão'],['PagNiv','Pix e cartão'],['BlackCat','Pix e cartão'],['VeoPag','Pix e cartão'],['MangoFy','Pix e cartão'],['Nuvra','Pix e cartão'],['Pagou.ai','Pix e cartão'],['Vext','Pix'],['PushinPay','Pix'],['PixGo','Pix'],['MushPag','Pix'],['PinPay','Pix']];
+$('#glist').innerHTML=lista.map(([n,t])=>`<span>${n}<em>${t}</em></span>`).join('');
+
+/* ---------- ABAS ---------- */
+const tabs=$$('.tab');
+function sel(t){tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;$('#'+x.getAttribute('aria-controls')).classList.toggle('show',on)});onPane(t.getAttribute('aria-controls'))}
+tabs.forEach((t,i)=>{t.addEventListener('click',()=>sel(t));t.addEventListener('keydown',e=>{const d={ArrowDown:1,ArrowRight:1,ArrowUp:-1,ArrowLeft:-1}[e.key];if(d){e.preventDefault();const n=tabs[(i+d+tabs.length)%tabs.length];n.focus();sel(n)}})});
+tabs.forEach((t,i)=>t.tabIndex=i?-1:0);
+
+const F=[['Checkout',418],['Dados',291],['Endereço',236],['Pagamento',171],['Comprou',96]];
+$('#funnel').innerHTML=F.map(([n,v],i)=>`<div class="fr${i===4?' loss':''}"><span>${n}</span><div class="bar"><i data-w="${v/418*100}"></i></div><span class="num">${v}</span></div>`).join('');
+function onPane(id){
+  if(id==='p-funil'){$$('#funnel i').forEach(i=>{i.style.width=0;requestAnimationFrame(()=>requestAnimationFrame(()=>i.style.width=i.dataset.w+'%'))})}
+  if(id==='p-rec'){const m=$$('#chat .msg');m.forEach(x=>x.classList.remove('show'));m.forEach((x,k)=>setTimeout(()=>x.classList.add('show'),reduce?0:250+k*650))}
+}
+/* conciliação */
+const recon=$('#recon');let rt=new Date();rt.setMinutes(rt.getMinutes()-15);
+function addRecon(first){
+  rt=new Date(rt.getTime()+5*60000);const p=2+Math.floor(Math.random()*5),ok=Math.floor(Math.random()*3);
+  const r=document.createElement('div');r.className='rrow'+(first?'':' new');
+  r.innerHTML=`<span>${rt.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</span><span>${p} pendentes conferidos</span>${ok?`<b>${ok} ${ok>1?'pagos':'pago'}</b>`:'<span>nenhum</span>'}`;
+  recon.prepend(r);while(recon.children.length>6)recon.lastChild.remove();
+}
+for(let i=0;i<4;i++)addRecon(true);
+setInterval(()=>{if($('#p-con').classList.contains('show'))addRecon()},2600);
+/* regras */
+function split(){const on=$('[data-k=dist]').getAttribute('aria-checked')==='true';const c=['#3CF2A6','#2BB07B','#1F7A57','#155440'];
+  $('#split').innerHTML=(on?[45,30,15,10]:[100,0,0,0]).map((w,i)=>`<i style="width:${w}%;background:${c[i]}"></i>`).join('')}
+$$('.switch').forEach(s=>s.addEventListener('click',()=>{const v=s.getAttribute('aria-checked')!=='true';s.setAttribute('aria-checked',v);split();toast(v?'Regra ligada.':'Regra desligada.')}));
+split();
+
+/* ---------- CHECKOUT ---------- */
+const sb=$$('.steps3 button'),cs=$$('.cstep');
+function step(n){sb.forEach((b,i)=>b.setAttribute('aria-pressed',i===n));cs.forEach((c,i)=>c.classList.toggle('show',i===n));if(n===2)startTimer()}
+sb.forEach(b=>b.addEventListener('click',()=>step(+b.dataset.s)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>step(+b.dataset.go)));
+$('[data-copy]').addEventListener('click',()=>toast('Código Pix copiado (demonstração).'));
+$$('.opt').forEach(o=>o.addEventListener('click',()=>{$$('.opt').forEach(x=>x.classList.remove('sel'));o.classList.add('sel')}));
+let tmr,secs=1799;function startTimer(){clearInterval(tmr);secs=1799;tmr=setInterval(()=>{secs--;$('#tmr').textContent=String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0')},1000)}
+/* QR ilustrativo determinístico */
+(()=>{const q=$('#qr');let s=7;const rnd=()=>(s=(s*9301+49297)%233280)/233280;let d='';
+  const finder=(x,y)=>{q.appendChild(el('rect',{x,y,width:7,height:7,fill:'#111'}));q.appendChild(el('rect',{x:x+1,y:y+1,width:5,height:5,fill:'#fff'}));q.appendChild(el('rect',{x:x+2,y:y+2,width:3,height:3,fill:'#111'}))};
+  for(let y=0;y<29;y++)for(let x=0;x<29;x++){const inF=(x<8&&y<8)||(x>20&&y<8)||(x<8&&y>20);if(!inF&&rnd()<.48)d+=`M${x} ${y}h1v1h-1z`}
+  q.appendChild(el('path',{d,fill:'#111'}));finder(0,0);finder(22,0);finder(0,22)})();
+
+/* ---------- PLANOS ---------- */
+const P=[{n:'Basic',m:0,f:2.5,r:10,d:1,h:45},{n:'Premium',m:127,f:2,r:6,d:5,h:90},{n:'Enterprise',m:447,f:1.5,r:4.5,d:10,h:120}];
+const brl=v=>v.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+function plans(){
+  const v=+$('#fat').value;$('#fatv').textContent=brl(v);
+  const costs=P.map(p=>p.m+v*p.f/100),min=Math.min(...costs);
+  $('#plans').innerHTML=P.map((p,i)=>`<div class="plan${costs[i]===min?' best':''}"><span class="tag">Mais barato para você</span><h3>${p.n}</h3><p class="fee">${p.m?brl(p.m)+'/mês + ':'Sem mensalidade + '}${String(p.f).replace('.',',')}% por pedido pago</p><div class="cost">${brl(costs[i])}<small>por mês neste faturamento</small></div><ul><li>${String(p.r).replace('.',',')}% em vendas recuperadas</li><li>${p.d} ${p.d>1?'domínios':'domínio'}</li><li>${p.h} dias de histórico de carrinhos</li></ul><button class="btn ${costs[i]===min?'primary':'ghost'}" data-plan="${p.n}">Escolher ${p.n}</button></div>`).join('');
+}
+$('#fat').addEventListener('input',plans);plans();
+$('#plans').addEventListener('click',e=>{const b=e.target.closest('[data-plan]');if(b)toast(`Plano ${b.dataset.plan} escolhido. No site real, aqui abre o cadastro.`)});
+$$('a[href="#planos"]').forEach(a=>a.addEventListener('click',()=>setTimeout(()=>$('#fat').focus({preventScroll:true}),700)));
+
+/* ---------- NÚMEROS ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);const n=e.target,to=+n.dataset.to,pre=n.dataset.pre||'',suf=n.dataset.suf||'';const t0=performance.now();
+  const f=t=>{const k=Math.min(1,(t-t0)/1200),v=Math.round(to*(1-Math.pow(1-k,3)));n.textContent=pre+v+suf;if(k<1)requestAnimationFrame(f)};reduce?n.textContent=pre+to+suf:requestAnimationFrame(f)}),{threshold:.6});
+$$('.stats .num').forEach(n=>io.observe(n));
+
+/* ---------- CTA: rotas reagem ao cursor ---------- */
+const cv=$('#fcv'),cx=cv.getContext('2d');let mx=.5,my=.5,W,H;
+function rs(){W=cv.width=cv.offsetWidth*devicePixelRatio;H=cv.height=cv.offsetHeight*devicePixelRatio}
+addEventListener('resize',rs);rs();
+cv.parentElement.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();mx=(e.clientX-r.left)/r.width;my=(e.clientY-r.top)/r.height});
+let ph=0;function draw(){cx.clearRect(0,0,W,H);ph+=.004;
+  for(let i=0;i<14;i++){const y0=H*(i+.5)/14;cx.beginPath();
+    for(let x=0;x<=W;x+=W/60){const dx=x/W-mx,inf=Math.exp(-dx*dx*8);const y=y0+(my*H-y0)*inf*.55+Math.sin(x/W*6+ph*6+i)*6*devicePixelRatio;x?cx.lineTo(x,y):cx.moveTo(x,y)}
+    cx.strokeStyle=i%4===0?'rgba(60,242,166,.55)':'rgba(143,163,154,.18)';cx.lineWidth=devicePixelRatio;cx.stroke()}
+  if(!reduce)requestAnimationFrame(draw)}
+draw();
+})();
+</script>
+</body>
+</html>
