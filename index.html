@@ -147,7 +147,6 @@ h2.big{font-size:clamp(40px,5vw,68px);font-weight:850;line-height:.95;font-varia
 .msg.show{opacity:1;transform:none}
 .msg small{display:block;font-family:var(--mono);font-size:11px;color:var(--mudo);margin-top:4px}
 .paid{display:inline-flex;gap:8px;align-items:center;color:var(--sinal);font-weight:600}
-new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){o.disconnect();if($('#p-funil').classList.contains('show'))onPane('p-funil')}}),{threshold:.4}).observe($('#funnel'));
 /* conciliação */
 .recon{font-family:var(--mono);font-size:13.5px}
 .rrow{display:grid;grid-template-columns:70px 1fr auto;gap:16px;padding:13px 0;border-bottom:1px solid var(--linha);color:var(--mudo)}
@@ -572,6 +571,7 @@ function onPane(id){
   if(id==='p-rec'){const m=$$('#chat .msg');m.forEach(x=>x.classList.remove('show'));m.forEach((x,k)=>setTimeout(()=>x.classList.add('show'),reduce?0:250+k*650))}
 }
 /* conciliação */
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){o.disconnect();if($('#p-funil').classList.contains('show'))onPane('p-funil')}}),{threshold:.4}).observe($('#funnel'));
 const recon=$('#recon');let rt=new Date();rt.setMinutes(rt.getMinutes()-15);
 function addRecon(first){
   rt=new Date(rt.getTime()+5*60000);const p=2+Math.floor(Math.random()*5),ok=Math.floor(Math.random()*3);
